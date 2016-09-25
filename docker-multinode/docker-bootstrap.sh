@@ -82,7 +82,7 @@ kube::bootstrap::restart_docker(){
     done
     service docker start
   elif kube::helpers::command_exists tce-ab; then
-      DOCKER_CONF="/etc/docker"
+      DOCKER_CONF="/var/lib/boot2docker/profile"
       kube::helpers::backup_file ${DOCKER_CONF}
 
       # Is there an uncommented DOCKER_OPTS line at all?
