@@ -97,13 +97,7 @@ kube::bootstrap::restart_docker(){
       kube::multinode::delete_bridge docker0
       killall dockerd
       sleep 10
-      while [[ $(ps aux | grep $(which docker) | grep -v grep | wc -l) -gt 0 ]]; do
-          kube::log::status "Waiting for docker to terminate"
-          sleep 1
-      done
-      
-      #rm /var/run/docker.pid
-      docker daemon
+      docker daemon &
   else
     kube::log::fatal "Error: docker-bootstrap currently only supports ubuntu|debian|amzn|centos|systemd."
   fi
