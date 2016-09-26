@@ -96,6 +96,7 @@ kube::bootstrap::restart_docker(){
 
       kube::multinode::delete_bridge docker0
       killall dockerd
+      sleep 10
       while [[ $(ps aux | grep $(which docker) | grep -v grep | wc -l) -gt 0 ]]; do
           kube::log::status "Waiting for docker to terminate"
           sleep 1
