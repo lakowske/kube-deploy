@@ -95,8 +95,8 @@ kube::bootstrap::restart_docker(){
       fi
 
       kube::multinode::delete_bridge docker0
-      MYPID=$(cat /var/run/docker.pid)
-      kill $MYPID
+      DOCKERD_PID=$(cat /var/run/docker.pid)
+      kill $DOCKERD_PID
       sleep 10
       docker daemon &
   else
