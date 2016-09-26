@@ -86,11 +86,11 @@ kube::bootstrap::restart_docker(){
       kube::helpers::backup_file ${DOCKER_CONF}
 
       # Is there an uncommented DOCKER_OPTS line at all?
-      if [[ -z $(grep "DOCKER_OPTS" $DOCKER_CONF | grep -v "#") ]]; then
-          echo "DOCKER_OPTS=\"--mtu=${FLANNEL_MTU} --bip=${FLANNEL_SUBNET} \"" >> ${DOCKER_CONF}
-          echo "update: DOCKER_OPTS=\"--mtu=${FLANNEL_MTU} --bip=${FLANNEL_SUBNET} \""
+      if [[ -z $(grep "EXTRA_ARGS" $DOCKER_CONF | grep -v "#") ]]; then
+          echo "EXTRA_ARGS=\"--mtu=${FLANNEL_MTU} --bip=${FLANNEL_SUBNET} \"" >> ${DOCKER_CONF}
+          echo "update: EXTRA_ARGS=\"--mtu=${FLANNEL_MTU} --bip=${FLANNEL_SUBNET} \""
       else
-          kube::helpers::replace_mtu_bip ${DOCKER_CONF} "DOCKER_OPTS"
+          kube::helpers::replace_mtu_bip ${DOCKER_CONF} "EXTRA_ARGS"
           echo "replace"
       fi
 
