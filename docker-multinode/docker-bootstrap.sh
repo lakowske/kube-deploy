@@ -95,10 +95,7 @@ kube::bootstrap::restart_docker(){
       fi
 
       kube::multinode::delete_bridge docker0
-      DOCKERD_PID=$(cat /var/run/docker.pid)
-      kill $DOCKERD_PID
-      sleep 10
-      docker daemon &
+      /etc/init.d/docker restart
   else
     kube::log::fatal "Error: docker-bootstrap currently only supports ubuntu|debian|amzn|centos|systemd."
   fi
